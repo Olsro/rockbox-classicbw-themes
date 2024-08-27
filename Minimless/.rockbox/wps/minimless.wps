@@ -1,0 +1,185 @@
+# ┌──────────────────────────────────────────────────────────────────────────┐
+# │                                                                          │
+# │   == M  I  N  I  M  •  SBS ==                                      [x]   │
+# │                                                                          │
+# │   BETA 3 • CLASSIC + MINI VER                                by yuuiko   │
+# │   2022-05-16                                                  CC-BY-SA   │
+# │                                                                          │
+# │   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓   │
+# │   ┃                                                                  ┃   │
+# │   ┃             Designed for and tested with B&W iPod 3G.            ┃   │
+# │   ┃                  Made to support all B&W iPods.                  ┃   │
+# │   ┃                                                                  ┃   │
+# │   ┃       Thank you to the following creators and their themes:      ┃   │
+# │   ┃                                                                  ┃   │
+# │   ┃                 CoverMax-XL by Christian Soffke                  ┃   │
+# │   ┃                 (Base themecode and inspiration)                 ┃   │
+# │   ┃         ipodVOL by xameius, submitted by Stephen Carroll         ┃   │
+# │   ┃                         (Speaker Icons)                          ┃   │
+# │   ┃                                                                  ┃   │
+# │   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛   │
+# │                                                                          │
+# └──────────────────────────────────────────────────────────────────────────┘
+#
+#     Human-readable version.
+#
+#     To generate a valid SBS or WPS from this file, execute the piece of
+#     AppleScript on the bottom. It will do the following things for you:
+#
+#        1. Remove AppleScript code from this file
+#           (everything that comes after this line:)
+#               "# --- End of Rockbox theme. Beginning of AppleScript ---"
+#        3. Insert text blocks that were previously defined,
+#           and replace variables if necessary
+#        4. Remove all linefeeds
+#        5. Remove all tabs
+#        6. Remove every line that starts with the "#" character
+#
+#
+# Minimless improvements by OlsroFR
+
+#Preload icons
+%xl(A,batt.bmp,0,0,16)
+%xl(B,d.bmp,0,0,7)
+%xl(C,scrub.bmp,0,0,2)
+%xl(D,playStatusIcns.bmp,0,0,9)
+%xl(E,hold.bmp,0,0)
+%xl(L,speaker.bmp,0,0,9)
+%xl(R,repeatMode.bmp,0,0,5)
+%xl(S,shuffle.bmp,12,0,2)
+
+# Preload fonts
+%Fl(2,14-Rockbox-Mix.fnt)
+%Fl(3,11-Sazanami-Mincho.fnt)
+
+
+# ---------
+# Logic:
+# ---------
+
+
+# Display Cover Art if available / reload cover art on hold / show lock icon
+%?mh<%Vd(hh)%?C<%Vd(c)|%Vd(cn)>|%?C<%Vd(c)|%Vd(cn)>>
+
+
+#Display volume bar and speaker icon
+#while volume is being adjusted
+
+#Display time elapsed/remaining while fast forwarding or rewinding
+
+%?mv(0.5)<%Vd(view_volumeBar_statusBarTop)%?if(%St(volume display), =,numeric)<%Vd(view_numericVolume_statusBarTop)|%Vd(view_speakerIcon_statusBarTop)>|%Vd(view_progressBar_statusBarTop)%?if(%mp,<,4)<%Vd(a)%Vd(b)%Vd(d)%Vd(e)%Vd(i)|%Vd(view_SI)>>
+
+%wd
+
+# ---------
+# Viewports:
+# ---------
+
+# --------------------------
+# --------   ICONS   -------
+# --------------------------
+
+
+#Repeat Mode and Shuffle indicators
+
+#shuffle and repeat
+%Vl(i,-22,-23,22,10,2)
+%?mm<%xd(Re)|%xd(Ra)|%xd(Rb)|%xd(Rc)|%xd(Rd)>
+%?if(%ps, =, s)<%xd(Sa)|%xd(Sb)>
+
+#play status
+%Vl(i,-22,-35,10,10,2)
+%?mp<%xd(Dc)|%xd(Da)|%xd(Db)|%xd(Dd)|%xd(De)>
+
+#batt
+%Vl(i,-10,-35,10,10,2)
+%?lh<%t(1)%xd(Ba);%t(1)%xd(Bb);%t(1)%xd(Bc);%t(1)%xd(Bd);%t(1)%xd(Be);%t(1)%xd(Bf);|%?bp<%?if(%bl, =, 100)<%xd(Ai)|%?if(%bl, =, 99)<%xd(Ai)|%t(1)%xd(Aj);%t(1)%xd(Ak);%t(1)%xd(Al);%t(1)%xd(Am);%t(1)%xd(An)%t(2)%xd(Ao);>>|%?bl<%xd(Aa)|%xd(Ab)|%xd(Ac)|%xd(Ad)|%xd(Ae)|%xd(Af)|%xd(Ag)|%xd(Ah)>>>
+
+# --------------------------------------
+# --------   Volume Indicators   -------
+# --------------------------------------
+
+
+#Speaker icon
+%Vl(view_speakerIcon_statusBarTop,0,-12,14,12,2)
+%?pv<%xd(La)|%xd(Lb)|%xd(Lc)|%xd(Ld)|%xd(Le)|%xd(Lf)|%xd(Lg)|%xd(Lh)|%xd(Lh)|%xd(Lh)|%xd(Li)>
+
+%Vl(view_speakerIcon_statusBarTop,17,-12,-,-,2)
+%al%pv dB
+
+%Vl(view_speakerIcon_statusBarTop,0,-30,-,14,2)
+%al%fc·%fb%fv
+
+# Volume Bar
+%Vl(view_volumeBar_statusBarTop,0,-38,-,5,2)%pv(0,0,-,5, noborder)
+
+
+
+# --------------------------------------
+# -------- Progress Indicators   -------
+# --------------------------------------
+
+# Progress Bar
+%Vl(view_progressBar_statusBarTop,0,-38,-,2,2)
+%pb(0,0,-,-, noborder)
+
+# Scrubber Icon
+%Vl(view_SI,72,-24,15,9,2)
+#%Vl(view_SI,62,-24,15,9,2)
+%?mp<|||%xd(Ca)|%xd(Cb)>
+
+
+
+# --------------------------------------
+# -----------  Song Info   -------------
+# --------------------------------------
+
+%V(0,-40,-,1,2)%Vb(0)
+%dr(-,-,-,-)
+
+# Show the duration of the current track at right of the cover art placeholder
+%Vl(c,100,9,-,-40,2)
+%ac%s%pc
+
+%ac/
+
+%ac%s%pt
+
+# Also show it if there's no available cover art
+%Vl(cn,100,9,-,-40,2)
+%ac%s%pc
+
+%ac/
+
+%ac%s%pt
+
+# Album Art
+%Vl(c,0,0,100,-40,2)
+%Cl(0,-12,100,100,c,c)
+%Cd
+
+# No Art
+%Vl(cn,0,0,100,-40,2)%Vf(1)%Vb(2)
+# Don't show the volume output realtime viewer to avoid lags for the OPUS format because it is very difficult to decode
+%?if(%fc,!=,Opus)<%?if(%pc,>,0)<%pL(0,0,100,-,vertical,noborder)>>
+
+# Title
+%Vl(a,0,-33,-25,11,3)
+%s%al%?it<%it|%fn>
+
+# Composer if available (display only for Classical music) & Artist
+#& Album & Year
+%Vl(b,0,-22,-25,11,3)
+%s%al%?if(%ig,=,Classical)<%?ic<By %ic - >%ia%?id< %(%id%)>|%ia%?id< %(%id%)>>%?iy<%?if(%iy,!=,0)< %(%iy%)>>
+
+# What's next
+%Vl(d,0,-11,-60,11,3)
+%al%s%?Fn<%?It<%t(7.5)Next: %It;%t(1.5)Next: by;%t(7)Next: %?Ia<%Ia|%(Unknown Artist%)>|Next: %Fn>|- End of Playlist ->
+
+# Alternating bottom right text : Playlist position, Clock hour, Battery percentage, Sleep timer (if available)
+%Vl(e,-60,-11,60,11,3)
+%ar%s%t(5)%pp/%pe;%ar%s%t(1.5)Clock:;%ar%s%t(3.5)%cH:%cM;%ar%s%t(1.5)Battery:;%ar%s%t(3.5)%bl%%;%?bs<%ar%s%t(1.5)Sleep:|%t(0)>;%?bs<%ar%s%t(3.5)%bs|%t(0)>
+
+#HOLD
+%Vl(hh,0,0,12,12,2)
+%xd(E)
