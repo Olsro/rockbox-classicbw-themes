@@ -7,6 +7,9 @@ Get the same experience as on my iPod Mini and the same look & feel by adapting 
 If you are an iPod Mini user, you can find my mini themes here : https://github.com/Olsro/rockbox-mini2g-themes
 Themes on this repo will not work on the Minis !
 
+# Requirement
+You need to install extra "Fonts file" from the last daily build : https://www.rockbox.org/daily.shtml
+
 # Minimless
 Based on Minim b4 by yuuiko. It's still Minimal... but less minimal than it used to be.
 
