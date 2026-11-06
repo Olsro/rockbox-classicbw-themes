@@ -1,0 +1,135 @@
+# ┌──────────────────────────────────────────────────────────────────────────┐
+# │                            __      _____  ___                            │
+# │                            \ \    / / _ \/ __|     by Christian Soffke   │
+# │   2024-01-11                \ \/\/ /|  _/\__ \                CC-BY-SA   │
+# │                              \_/\_/ |_|  |___/                           │
+# │   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓   │
+# │   ┃                                                                  ┃   │
+# │   ┃ Uses original icons as well as icons from the following themes:  ┃   │
+# │   ┃                                                                  ┃   │
+# │   ┃         ipodVOL by xameius, submitted by Stephen Carroll         ┃   │
+# │   ┃   (Battery Status, Hold Indicator, Player Status, Repeat Mode,   ┃   │
+# │   ┃                     modified Speaker Icons)                      ┃   │
+# │   ┃                                                                  ┃   │
+# │   ┃          ChicagoUnified by Brendan Riera (Shuffle Icon)          ┃   │
+# │   ┃                                                                  ┃   │
+# │   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛   │
+# │                                                                          │
+# └──────────────────────────────────────────────────────────────────────────┘
+#
+#
+#
+#	Load needed fonts
+#
+%Fl(2,10-Pixo7B.fnt)
+%Fl(3,16-ChicagoCJK12.fnt)
+#
+#	Preload icons
+#
+%xl(M,speakerMute.bmp,0,0)
+%xl(L,speakerLoudest.bmp,0,0)
+%xl(R,repeatMode.bmp,0,0,4)
+%xl(S,shuffle.bmp,15,1)
+%xl(vb,volumeBar.bmp,0,0)
+%xl(pb,progressBar.bmp,0,0)
+%xl(bdv,volumeBarBackdrop.bmp,0,0)
+%xl(bdp,progressBarBackdrop.bmp,0,0)
+%xl(bdps,progressBarShortBackdrop.bmp,0,0)
+#
+# ---------
+# Logic:
+# ---------
+#
+#
+#
+%?mv(2)<%?or(%if(%pv, >, 0),%if(%St(volume display), =, numeric))<%Vd(vnum)>%Vd(m)%Vd(v)%Vd(l)|%Vd(e)%Vd(p)%Vd(r)>
+#
+#
+# ---------
+# Viewports:
+# ---------
+# 	Position in Playlist and number of items in total 
+%V(4,22,120,10,2)%Vf(0)%Vb(3) 
+%al%pp %Sx(of) %pe
+#
+#
+# 	Repeat Mode and Shuffle indicators
+#
+%V(-30,23,24,9,2)%Vf(0)%Vb(3)
+%?mm<|%xd(Ra)|%xd(Rb)|%xd(Rc)|%xd(Rd)>
+%?if(%ps, =, s)<%xd(S)|>
+#
+#
+# --------------------------------------
+# --------   Volume Indicators   -------
+# --------------------------------------
+#
+# 	Mute Speaker icon
+#
+%Vl(m,9,100,14,12,-)
+%xd(M)
+#
+#
+# 	Volume Bar 
+#
+%Vl(v,19,101,120,9,-)
+%pv(0,0,120,9,vb,backdrop,bdv)
+#
+#
+# 	Loudest Speaker icon
+#
+%Vl(l,-19,100,14,12,-)
+%xd(L)
+#
+#
+# Numerical volume display
+#
+%Vl(vnum,0,114,160,10,2)%Vf(0)%Vb(3)
+%ac%pv dB
+#
+#
+# --------------------------------------
+# -------- Progress Indicators   -------
+# --------------------------------------
+#
+# 	Progress Bar 
+#
+%Vl(p,8,101,144,9,-)
+%pb(0,0,144,9,pb,backdrop,bdp)
+#
+#
+# 	Elapsed Time
+#
+%Vl(e,8,112,72,16,3)
+%al%pc
+#
+#
+# 	Time remaining
+#
+%Vl(r,-80,112,72,16,3)
+%ar-%pr
+#
+#
+#
+#
+# --------------------------------------
+# -----------  Song Info   -------------
+# ---------  WITHOUT COVER  ------------
+# --------------------------------------
+#
+# Title, or filename if no title is available 
+#
+%V(0,40,160,16,3)
+%s%ac%?it<%it|%fn>
+#
+#
+# Composer if available (only for Classical music) & Artist 
+#
+%V(0,56,160,16,3)
+%s%ac%?if(%ig,=,Classical)<%?ic<By %ic - >%ia|%ia>
+#
+# Album 
+#
+%V(0,72,160,16,3)
+%s%ac%id
+#

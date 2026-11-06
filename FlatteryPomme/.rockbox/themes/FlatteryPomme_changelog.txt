@@ -1,0 +1,122 @@
+┌──────────────────────────────────────────────────────────────────────────┐
+│                      ___ _      _   _                                    │
+│                     | __| |__ _| |_| |_ ___ _ _ _  _                     │
+│                     | _|| / _` |  _|  _/ -_) '_| || |                    │
+│                     |_| |_\__,_|\__|\__\___|_|  \_, |                    │
+│                                                 |__/                     │
+│                                                                          │
+│                              Rockbox Theme                               │
+│   Rev. 13                              original theme by Christian Soffke │
+│   2026-09-20                              adapted and renamed by Olsro    │
+│                                                                          │
+│   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓   │
+│   ┃                                                                  ┃   │
+│   ┃ Uses original icons as well as icons from the following themes:  ┃   │
+│   ┃                                                                  ┃   │
+│   ┃         ipodVOL by xameius, submitted by Stephen Carroll         ┃   │
+│   ┃   (Battery Status, Hold Indicator, Player Status, Repeat Mode,   ┃   │
+│   ┃                     modified Speaker Icons)                      ┃   │
+│   ┃                                                                  ┃   │
+│   ┃          ChicagoUnified by Brendan Riera (Shuffle Icon)          ┃   │
+│   ┃                                                                  ┃   │
+│   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛   │
+│                                                                          │
+│    Revision History:                                                     │
+│                                                                          │
+│    Rev. 13 (2026-09-20), by Olsro:                                       │
+│      - Renames the theme from Flattery to FlatteryPomme                  │
+│      - Uses official Chicago CJK and Pixo fonts; padded Chicago cells    │
+│        fill six menu rows, with a blank icon column as a left margin     │
+│      - Displays the current time and uses Rockbox translations for       │
+│        playback, recording and FM-radio screen titles                    │
+│      - Adds a 160x128 USB screen with a bold "Do not disconnect." label  │
+│      - Fix graphical glitch on volume/progress bar                       │
+│                                                                          │
+│    Rev. 12 (2024-01-11):                                                 │
+│      - Adds minimalistic icons necessary for basic RB functionality      │
+│      - Moves player status and sleep timer icons                         │
+│      - Shows dB indicator on WPS for levels > 0dB                        │
+│      - Hides HDD activity indicator on WPS                               │
+│      - Removes sound adjustment indicators                               │
+│      - Removes separate "human readable" WPS/SBS                         │
+│                                                                          │
+│    Rev. 11 (2021-03-22):                                                 │
+│      - Moves sound adjustment indicators while changing volume           │
+│        to QuickScreen (Requires a recent daily build or development      │
+│        version of Rockbox)                                               │
+│      - Unified SBS across multiple themes                                │
+│                                                                          │
+│    Rev. 10 (2019-02-15):                                                 │
+│      - Fixed issue where treble/bass indicator would permanently         │
+│        be displayed while changing volume on iPods 1G-3G                 │
+│        (in the simulator at least)                                       │
+│      - turned nested conditionals into logical "and" and "or" operators  │
+│      - slightly faster loading time                                      │
+│                                                                          │
+│    Rev. 9 (2019-02-10):                                                  │
+│      - Lets you quickly peek at the remaining battery percentage         │
+│        in title of Quickscreen (in addition to the current time),        │
+│        if the battery level display is set to graphical.                 │
+│      - Bugfix: Numeric battery display wasn't centered                   │
+│                                                                          │
+│    Rev. 8 (2019-02-09):                                                  │
+│      - Bugfix: Titles weren't centered                                   │
+│                                                                          │
+│    Rev. 7 (2019-02-09):                                                  │
+│      - Decreases the time it takes for theme to load                     │
+│      - Will keep the status bar at a static height regardless of         │
+│        chosen menu font                                                  │
+│      - Adds storage access indicator above battery icon                  │
+│      - Lets you quickly peek at the current time in title of Quickscreen │
+│      - Doesn’t use a custom title anymore when context menus have        │
+│        their own title that is not simply “context menu”                 │
+│                                                                          │
+│    Rev. 6 (2018-12-23):                                                  │
+│      - Common base skin shared among Flattery, Flattery-B, FlatCover,    │
+│        Coverly and Minimally                                             │
+│      - Common WPS shared among Flattery, Flattery-B,FlatCover            │
+│        (the look of the theme automatically adapts to the                │
+│        name of the WPS file)                                             │
+│                                                                          │
+│    Rev. 5 (2018-12-22):                                                  │
+│      - The theme now comes with a new default menu font that has         │
+│        additional vertical                                               │
+│        padding between list entries.                                     │
+│      - Horizontal padding to the left of menu items is now enabled       │
+│        by using (blank) icons                                            │
+│      - The theme will now automatically adjust the dimensions of the     │
+│        title bar and other                                               │
+│        UI elements depending on the chosen menu font                     │
+│      - The numerical battery indicator is now centered                   │
+│                                                                          │
+│    Rev. 4 (2018-12-18):                                                  │
+│      - Added Sleep Timer icon and countdown                              │
+│      - Will now display current time when locked                         │
+│      - Added indicators for EQ/Balance/Crossfeed etc.                    │
+│        (while changing volume)                                           │
+│                                                                          │
+│    Rev. 3 (2018-12-16):                                                  │
+│      - Improved accuracy of visual battery level indicator               │
+│      - Offers option to display numerical value instead of icon for      │
+│        battery level                                                     │
+│      - Offer option to display a numerical value for the volume level    │
+│      - Moved option to choose a second variant of the progress bar to    │
+│        another theme                                                     │
+│      - Removed option to display a file's codec                          │
+│                                                                          │
+│    Rev. 2 (2018-12-15):                                                  │
+│      - Refinement of progress/volume bar and speaker icons               │
+│      - removed icons for fast-forwarding/rewinding                       │
+│      - Spacing adjustments                                               │
+│                                                                          │
+│    Rev. 1 (2018-03-04):                                                  │
+│      - Increase in vertical spacing                                      │
+│        of track info on WPS                                              │
+│      - Battery icon shows battery level when                             │
+│        connected to charger                                              │
+│                                                                          │
+│    Rev. 0 (2018-02-27):                                                  │
+│      - Initial Release                                                   │
+│                                                                          │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘

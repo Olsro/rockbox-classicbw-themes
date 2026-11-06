@@ -69,6 +69,9 @@ Licence : https://creativecommons.org/licenses/by-sa/3.0/deed.fr
 # SprocketModern or Minimless ?
 The choice is up to you, I currently just like to use both. I often prefer slightly Minimless because the design is much more advanced and ambitious, and because cover arts looks much better in it. With my improvements, Minimless is now just as usable as SprocketModern; you have access to all important info in the WPS just by looking at any time your screen during a few seconds.
 
+# FlatteryPomme
+Based on Flattery by Christian Soffke with better fonts (and CJK compatible) + slight changes
+
 # Thoughts about cover arts
 Some things that I noticed about cover arts : 
 - This tool https://www.mp3tag.de/en/download.html can in the menu "Actions" mass convert embedded images to plain jpeg and extract them. I recommend using it to convert to 200x200 jpeg all of your library. Don't push the quality slider to the maximum, it's un-necessary and overkill, keep it at the default level (which is 2 bars below the maximum).
@@ -93,3 +96,7 @@ You can tip me on Patreon : https://www.patreon.com/Olsro
 ![Alt text](SprocketModern/screenshots/1.png?raw=true "Home")
 ![Alt text](SprocketModern/screenshots/2.png?raw=true "WPS")
 ![Alt text](SprocketModern/screenshots/3.png?raw=true "WPS with cover art")
+
+## FlatteryPomme
+![Alt text](FlatteryPomme/screenshots/1.png?raw=true "Home")
+![Alt text](FlatteryPomme/screenshots/2.png?raw=true "WPS1")

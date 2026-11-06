@@ -1,0 +1,179 @@
+# ┌──────────────────────────────────────────────────────────────────────────┐
+# │                    ___                 ___ _   _                         │
+# │                   | _ ) __ _ ___ ___  / __| |_(_)_ _                     │
+# │                   | _ \/ _` (_-</ -_) \__ \ / / | ' \                    │
+# │                   |___/\__,_/__/\___| |___/_\_\_|_||_|                   │
+# │                                                                          │
+# │   2024-01-11                                       by Christian Soffke   │
+# │                                                               CC-BY-SA   │
+# │                                                                          │
+# │   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓   │
+# │   ┃                                                                  ┃   │
+# │   ┃ Uses original icons as well as icons from the following themes:  ┃   │
+# │   ┃                                                                  ┃   │
+# │   ┃         ipodVOL by xameius, submitted by Stephen Carroll         ┃   │
+# │   ┃   (Battery Status, Hold Indicator, Player Status, Repeat Mode,   ┃   │
+# │   ┃                     modified Speaker Icons)                      ┃   │
+# │   ┃                                                                  ┃   │
+# │   ┃          ChicagoUnified by Brendan Riera (Shuffle Icon)          ┃   │
+# │   ┃                                                                  ┃   │
+# │   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛   │
+# │                                                                          │
+# └──────────────────────────────────────────────────────────────────────────┘
+#
+# 	Load needed fonts
+#
+%Fl(3,16-ChicagoCJK12.fnt)
+%Fl(4,10-Pixo7B.fnt)
+#
+# 	Preload icons
+%xl(B,batteryStatus.bmp,3,2,6)
+%xl(C,batteryChargingStatus.bmp,3,2,5)
+%xl(P,playerStatus.bmp,0,2,4)
+%xl(H,holdSlider.bmp,0,2)
+%xl(U,timer.bmp,1,2)
+%xl(L,speaker.bmp,2,3,9)
+# USB icon from sprocket1Pod by Le Khanh Binh (CC-BY-SA 3.0)
+%xl(X,prohibited.bmp,0,0)
+#
+#
+#
+# ---------
+# Logic:
+# ---------
+# 	Set up UI Viewport 
+#
+%?if(%cs, =, 21)<%VI(usb)%Vd(usb)|%VI(main)>
+#
+# 	Show speaker icon on QuickScreen while changing volume
+#
+%?and(%if(%cs, =, 10),%if(%mv(2), =, v))<%Vd(volIcon)|%Vd(playerStatus)>
+#
+#
+# 	Display battery icon that corresponds to the currently remaining charge,
+# 	or show battery level in %, depending on system setting
+%?if(%St(battery display), =, numeric)<%Vd(battLevel)|%Vd(battIcon)>
+#
+#
+# 	Show Storage Activity Indicator on screens other than the WPS
+%?and(%if(%lh, =, h),%if(%cs, !=, 2))<%Vd(diskon)>
+#
+#
+# 	Display the current time on every screen.
+%Vd(currTime)
+#
+#
+# ---------
+# Viewports:
+# ---------
+#
+%Vl(diskon,-25,0,21,1,-)
+%dr(0,0,-,-,1)
+#
+# 	Battery level
+# 	treat 99% as fully charged already
+#
+%Vl(battLevel,-30,4,3,12,4)%Vf(0)%Vb(3)
+# whitespace character
+ 
+%Vl(battLevel,-27,4,25,12,4)%Vf(0)%Vb(3)
+%?or(%if(%bl, =, 100),%if(%bl, =, 99))<%acCGD|%ac%bl%%>
+#
+#
+#	separator bar on top
+%V(0,18,-,1,-)
+%dr(0,0,-,-,0)
+#
+#
+# 	main content view
+%Vi(main,0,20,160,108,-)
+%Vf(0)
+%Vb(3)
+
+# Empty UI viewport while the USB screen is active. This suppresses
+# Rockbox's default USB logo so the themed USB view is shown instead.
+%Vi(usb,0,0,0,0,-)
+#
+#
+#
+%Vl(volIcon,4,0,20,15,-)
+%Vf(0)
+%Vb(3)
+%?pv<%xd(La)|%xd(Lb)|%xd(Lc)|%xd(Ld)|%xd(Le)|%xd(Lf)|%xd(Lg)|%xd(Lh)|%xd(Lh)|%xd(Lh)|%xd(Li)>
+#
+#
+# 	Battery Icon
+# 	First entry in %bl is used when the battery level isn’t known,
+# 	then goes from 0 to n for battery level == 100
+#
+%Vl(battIcon,-30,2,28,12,-)
+%?bp<%?bl<%xd(Ca)|%xd(Ca)|%xd(Ca)|%xd(Cb)|%xd(Cb)|%xd(Cb)|%xd(Cb)|%xd(Cc)|%xd(Cc)|%xd(Cc)|%xd(Cc)|%xd(Cc)|%xd(Cc)|%xd(Cd)|%xd(Cd)|%xd(Cd)|%xd(Cd)|%xd(Cd)|%xd(Cd)|%xd(Cd)|%xd(Ce)|%xd(Ce)>|%?bl<%xd(Bb)|%xd(Bb)|%xd(Bb)|%xd(Bc)|%xd(Bc)|%xd(Bc)|%xd(Bc)|%xd(Bd)|%xd(Bd)|%xd(Bd)|%xd(Bd)|%xd(Bd)|%xd(Bd)|%xd(Be)|%xd(Be)|%xd(Be)|%xd(Be)|%xd(Be)|%xd(Be)|%xd(Be)|%xd(Bf)|%xd(Bf)>>
+#
+#
+#
+# 	Player Status Icon
+%Vl(playerStatus,4,2,20,12,-)
+%?mp<|%xd(Pa)|%xd(Pb)|>
+#
+#
+#
+#
+# 	Hold Slider Icon
+%V(24,1,11,13,-)
+%?mh<%xd(H)>
+#
+#
+# 	Sleep Timer Icon
+%Vl(timerIcon,24,2,11,12,-)
+%Vf(0)
+%Vb(3)
+%xd(U)
+# 
+#
+#
+#
+%Vl(longTitle,31,1,-31,16,3)
+%Vf(0)
+%Vb(3)
+%s%ac%?cs<iPod|%Sx(Now Playing)|%Sx(Recording)|%Sx(FM Radio)|%Lt|%Lt|%Lt|%Lt|%Lt|%?cc<%?cf<%cH:%cM|%cl:%cM %cP>>%?if(%St(battery display), =, graphic)<%?cc<  >%?if(%bl, =, 100)<CGD|%?if(%bl, =, 99)<CGD|%bl%%>>>|%Lt|%Lt|%Lt|%Lt|%?if(%Lt, =,Context Menu)<Perform Action...|%Lt>|%Lt|%Lt|%Lt|%Lt|%Lt|iPod>
+#
+#	Shorter title bar text
+%Vl(shortTitle,37,1,-37,16,3)
+%Vf(0)
+%Vb(3)
+%s%ac%?cs<iPod|%Sx(Now Playing)|%Sx(Recording)|%Sx(FM Radio)|%Lt|%Lt|%Lt|%Lt|%Lt|%?cc<%?cf<%cH:%cM|%cl:%cM %cP>>%?if(%St(battery display), =, graphic)<%?cc<  >%?if(%bl, =, 100)<CGD|%?if(%bl, =, 99)<CGD|%bl%%>>>|%Lt|%Lt|%Lt|%Lt|%?if(%Lt, =,Context Menu)<Perform Action...|%Lt>|%Lt|%Lt|%Lt|%Lt|%Lt|iPod>
+#
+#
+#	Current time
+%Vl(currTime,35,1,-35,16,3)
+%Vf(0)
+%Vb(3)
+%ac%?cf<%cH:%cM|%cl:%cM %cP>
+#
+#
+# 	Sleep Timer, erase surrounding area
+%Vl(timerTextSurrounding,35,1,15,16,3)
+%Vf(0)
+%Vb(3)
+#
+#
+# 	Sleep Timer remaining time
+%Vl(timerText,50,1,60,16,3)
+%Vf(3)
+%Vb(0)
+%ac%bs
+#
+# 	Sleep Timer, erase surrounding area
+%Vl(timerTextSurrounding,110,1,-30,16,3)
+%Vf(0)
+%Vb(3)
+#
+# USB screen (screen state 21), adapted for 160x128.
+%Vl(usb,55,35,50,50,-)
+%xd(X)
+%Vl(usb,0,103,160,20,4)
+%Vf(0)
+%Vb(3)
+%acDo not disconnect.
+#
+#
